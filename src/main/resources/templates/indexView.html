@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmls:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes Amor Ejercicio 3.4</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    
+</head>
+<body>
+    <h1>Listado de números aleatorios</h1>
+    <table border="1px" th:if="${listaNumeros.size() > 0}">
+        <thead>
+            <th>Numero</th>
+            <th>Operación</th>
+        </thead>
+
+        <tbody>
+            <tr th:classappend="${numero > 50} ? 'mayor50' : 'menor50'" 
+                th:each="numero : ${listaNumeros}">
+                <td th:text="${numero}" ></td>
+                <td>
+                    <a th:href="@{/delete/{id}(id=${numero})}">delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Total números: <span th:text="${cantidadTotal}">0</span><br/></p>
+    <a th:href="@{/new}">Nuevo número</a><br/>
+</body>
+</html>

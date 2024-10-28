@@ -1,0 +1,14 @@
+
+body {
+    background-color: rgb(190, 190, 219);
+}
+
+.mayor50 {
+    background-color: rgb(141, 239, 119);
+    color: rgb(13, 123, 6);
+}
+
+.menor50 {
+    background-color: rgb(251, 210, 248);
+    color: rgb(175, 6, 6);
+}
