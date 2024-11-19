@@ -1,41 +1,37 @@
 package mag.ej04.controllers;
 
-import java.util.LinkedHashSet;
-import java.util.Random;
-import java.util.Set;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import mag.ej04.services.NumerosService;
+
 @Controller
 public class NumerosController {
-    Random random = new Random();
-    public Set<Integer> lista = new LinkedHashSet<>(); // Similar a ArrayList pero no admite duplicados
 
+    @Autowired (required = true)
+    private NumerosService numerosServices;
+    
     @GetMapping({ "/", "/list", "" })
     public String showList(Model model) {
-        model.addAttribute("cantidadTotal", lista.size());
-        model.addAttribute("listaNumeros", lista);
+        model.addAttribute("cantidadTotal", numerosServices.getLista().size());
+        model.addAttribute("listaNumeros", numerosServices.getLista());
         return "indexView";
     }
 
 
     @GetMapping("/new")
     public String showNew() {
-
-        boolean added;
-        do{
-            added = lista.add(random.nextInt(100) + 1);
-        } while (!added);
-
+        numerosServices.add();
+        
         return "redirect:/list";
     }
     
     @GetMapping("/delete/{id}")
     public String showDelete(@PathVariable Integer id) {
-        lista.remove(id);
+        numerosServices.delete(id);
         return "redirect:/list";
     }
     
